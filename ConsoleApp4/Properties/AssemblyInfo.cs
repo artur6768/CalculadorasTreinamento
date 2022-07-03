@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Aplicativo de diversas calculadoras, criado para estudar um pouco de C#")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Artur6768 Softwares")]
-[assembly: AssemblyProduct("ConsoleApp4")]
+[assembly: AssemblyProduct("Calculadora.Artur6768")]
 [assembly: AssemblyCopyright("Artur6768 Copyright ©  2022")]
 [assembly: AssemblyTrademark("Artur6768 Softwares")]
 [assembly: AssemblyCulture("")]
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // É possível especificar todos os valores ou usar como padrão os Números de Build e da Revisão
 // usando o "*" como mostrado abaixo:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2.1")]
-[assembly: AssemblyFileVersion("2.1")]
+[assembly: AssemblyVersion("3.2")]
+[assembly: AssemblyFileVersion("3.2")]

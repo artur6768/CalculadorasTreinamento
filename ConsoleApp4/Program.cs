@@ -34,7 +34,7 @@ namespace Calculadoras
             Console.Beep(800, 500);
             Thread.Sleep(300);
             Console.Clear();
-            Console.WindowWidth = 100;
+            Console.WindowWidth = 80;
         }
         public static void Selecao()
         {
@@ -42,15 +42,16 @@ namespace Calculadoras
             bool verificar;
             int userout;
             //
-            Console.WriteLine("==========================================\n" +
+            while (true)
+            {
+                Console.WriteLine("==========================================\n" +
                                    "Qual calculadora deseja utiizar?\n" +
                                            "[1] Pitagoras\n" +
                                       "[2] Volume da esfera\n" +
                                           "[3] Area do circulo\n" +
                                       "[4] Comprimento do circulo\n" +
                               "==========================================");
-            while (true)
-            {
+
                 Console.Write("Sua escolha: ");
                 verificar = int.TryParse(Console.ReadLine(), out (userout));
                 if (verificar) break;
@@ -77,6 +78,34 @@ namespace Calculadoras
             Console.WriteLine("Retornado ao Terminal...");
             Environment.ExitCode = -1;
         }
+        public static void Escolha()
+        {
+            //VARIAVEL LOCAL
+            bool miniverificar = true;
+            //
+            while (miniverificar)
+            {
+                Console.WriteLine("Pressione enter para continuar.");
+                _ = Console.ReadLine();
+                Console.WriteLine("Deseja usar outra calculadora? (S/n)");
+                string retornar = Console.ReadLine();
+                switch (retornar)
+                {
+                    case "y" or "Y" or "S" or "s":
+                        miniverificar = false;
+                        UserInterface.Selecao();
+                        break;
+                    case "n" or "N":
+                        miniverificar = false;
+                        UserInterface.Fim();
+                        break;
+                    default:
+                        break;
+                }
+                Console.Clear();
+                Console.WriteLine("Erro, opção invalida, use S para sim e N para não.");
+            }
+        }
     }
     class CalcPitagoras
     { 
@@ -84,7 +113,6 @@ namespace Calculadoras
         {
             //VARS LOCAL
             bool verificar;
-            bool miniverificar = false;
             double cat1;
             double cat2;
             double catqua1;
@@ -111,26 +139,7 @@ namespace Calculadoras
             catqua2 = (cat2 * cat2);
             resultado = Math.Sqrt(catqua1 + catqua2);
             Console.WriteLine($"O resultado da hipotenusa é: {resultado}");
-            Console.WriteLine("Pressione enter para continuar.");
-            while (miniverificar)
-                { 
-            Console.WriteLine("Deseja usar outra calculadora? (S/n)");
-            string retornar = Console.ReadLine();
-                switch (retornar)
-                {
-                    case "y" or "Y" or "S" or "s":
-                        UserInterface.Selecao();
-                        miniverificar = true;
-                        break;
-                    case "n" or "N":
-                        UserInterface.Fim();
-                        miniverificar = true;
-                        break;
-                    default:
-                        break;
-                }
-                Console.WriteLine("Erro, opção invalida, use S para sim e N para não.");
-            }
+            UserInterface.Escolha();
         }
     }
     class CalcEsfera
@@ -141,9 +150,9 @@ namespace Calculadoras
         readonly double pi = VariaveisGlobais.Pi;
         //
         //VARIAVEIS DA CLASSE
-        float raio;
-        float diametro;
-        float resultado;
+        double resultado;
+        bool verificar;
+        double userout;
         //
         public static void Principal()
         {
@@ -153,9 +162,9 @@ namespace Calculadoras
             //
             Console.WriteLine("==========================================\n" +
                                         "O que deseja fazer ?\n" +
-                                        "  [1] Usar diâmetro\n" +
-                                          "[2]  Usar raio\n" +
-                                          "[3]   Voltar \n" +
+                                        "[1] Usar diâmetro\n" +
+                                        "[2]  Usar raio\n" +
+                                        "[3]   Voltar \n" +
                               "==========================================");
             while (true)
             {
@@ -164,27 +173,58 @@ namespace Calculadoras
                 if (verificar) break;
                 Console.Clear();
                 Console.WriteLine("Erro, opção invalida.");
-                switch (userout)
+            }
+            verificar = false;
+            switch (userout)
                 {
                     case 1:
-                        Diametro();
+                        var instanciadiametro = new AreaCirc();
+                        instanciadiametro.Diametro();
                         break;
                     case 2:
-                        Raio();
+                        var instanciaraio = new AreaCirc();
+                        instanciaraio.Raio();
                         break;
                     case 3:
                         UserInterface.Selecao();
                         break;
                 }
+        }
+        public void Diametro()
+        {
+            //VARS LOCAL
+            double ra1;
+            double ra2;
+            //
+            while (true)
+            {
+                Console.WriteLine("Por favor, insira o valor do diametro em centímetros: ");
+                verificar = double.TryParse(Console.ReadLine(), out (userout));
+                if (verificar) break;
+                Console.Clear();
+                Console.WriteLine("Erro, valor invalido.");
             }
+            ra1 = (userout/2);
+            ra2 = (ra1 * ra1);
+            resultado = (pi*ra2);
+            Console.WriteLine($"A área deste circulo é {resultado} CM²");
+            UserInterface.Escolha();
         }
-        public static void Diametro()
+        public void Raio()
         {
-
-        }
-        public static void Raio()
-        {
-
+            //VARS LOCAL
+            //
+            while (true)
+            {
+                Console.WriteLine("Por favor, insira o valor do raio em centímetros: ");
+                verificar = double.TryParse(Console.ReadLine(), out (userout));
+                if (verificar) break;
+                Console.Clear();
+                Console.WriteLine("Erro, valor invalido.");
+            }
+            resultado = (pi)*(userout*userout);
+            Console.WriteLine($"A área deste circulo é {resultado} CM²");
+            UserInterface.Escolha();
         }
     }
 }
