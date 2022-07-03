@@ -36,7 +36,7 @@ namespace Calculadoras
             Console.Clear();
             Console.WindowWidth = 100;
         }
-        static void Selecao()
+        public static void Selecao()
         {
             //VARS LOCAL
             bool verificar;
@@ -65,6 +65,7 @@ namespace Calculadoras
                 case 2:
                     break;
                 case 3:
+                    AreaCirc.Principal();
                     break;
                 case 4:
                     break;
@@ -81,8 +82,9 @@ namespace Calculadoras
     { 
         public static void Principal()
         {
-            //VARS local
+            //VARS LOCAL
             bool verificar;
+            bool miniverificar = false;
             double cat1;
             double cat2;
             double catqua1;
@@ -108,10 +110,81 @@ namespace Calculadoras
             catqua1 = (cat1 * cat1);
             catqua2 = (cat2 * cat2);
             resultado = Math.Sqrt(catqua1 + catqua2);
-            Console.WriteLine($"O resultado será: {resultado}");
-            Console.WriteLine("Pressione qualquer tecla para continuar (No futuro, será possivel escolher outras opções");
-            _ = Console.ReadLine();
-            UserInterface.Fim();
+            Console.WriteLine($"O resultado da hipotenusa é: {resultado}");
+            Console.WriteLine("Pressione enter para continuar.");
+            while (miniverificar)
+                { 
+            Console.WriteLine("Deseja usar outra calculadora? (S/n)");
+            string retornar = Console.ReadLine();
+                switch (retornar)
+                {
+                    case "y" or "Y" or "S" or "s":
+                        UserInterface.Selecao();
+                        miniverificar = true;
+                        break;
+                    case "n" or "N":
+                        UserInterface.Fim();
+                        miniverificar = true;
+                        break;
+                    default:
+                        break;
+                }
+                Console.WriteLine("Erro, opção invalida, use S para sim e N para não.");
+            }
+        }
+    }
+    class CalcEsfera
+    { }
+    class AreaCirc
+    {
+        //RECEBER GLOBAL
+        readonly double pi = VariaveisGlobais.Pi;
+        //
+        //VARIAVEIS DA CLASSE
+        float raio;
+        float diametro;
+        float resultado;
+        //
+        public static void Principal()
+        {
+            //VARS LOCAL
+            bool verificar;
+            int userout;
+            //
+            Console.WriteLine("==========================================\n" +
+                                        "O que deseja fazer ?\n" +
+                                        "  [1] Usar diâmetro\n" +
+                                          "[2]  Usar raio\n" +
+                                          "[3]   Voltar \n" +
+                              "==========================================");
+            while (true)
+            {
+                Console.Write("Sua escolha: ");
+                verificar = int.TryParse(Console.ReadLine(), out (userout));
+                if (verificar) break;
+                Console.Clear();
+                Console.WriteLine("Erro, opção invalida.");
+                switch (userout)
+                {
+                    case 1:
+                        Diametro();
+                        break;
+                    case 2:
+                        Raio();
+                        break;
+                    case 3:
+                        UserInterface.Selecao();
+                        break;
+                }
+            }
+        }
+        public static void Diametro()
+        {
+
+        }
+        public static void Raio()
+        {
+
         }
     }
 }

@@ -34,6 +34,9 @@
   <PropertyGroup>
     <ApplicationIcon>Oxygen-Icons.org-Oxygen-Apps-accessories-calculator.ico</ApplicationIcon>
   </PropertyGroup>
+    <PropertyGroup>  
+        <LangVersion>9.0</LangVersion>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
